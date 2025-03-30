@@ -25,6 +25,12 @@ export default defineConfig({
           'react-dom': 'ReactDOM',
         },
         inlineDynamicImports: true,
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name === 'style.css') {
+            return 'style.css';
+          }
+          return assetInfo.name || '';
+        },
       },
     },
     cssCodeSplit: false,

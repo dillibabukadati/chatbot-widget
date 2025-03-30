@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Chatbot Widget Demo</title>
+    <title>Chatbot Widget Demo</title>
     <!-- Add the widget's CSS -->
-    <link rel="stylesheet" href="dist/style.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             font-family: system-ui, -apple-system, sans-serif;
@@ -48,37 +48,31 @@
             margin: 0;
             font-family: monospace;
         }
-        #chatbot-widget-root {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>Simple Chatbot Widget Demo</h1>
-            <p>This is a minimal example of the chatbot widget integration</p>
+            <h1>Chatbot Widget Demo</h1>
+            <p>A simple and customizable chatbot widget for your website</p>
         </div>
 
         <div class="content">
             <h2>Quick Start</h2>
-            <p>Copy and paste this code into your HTML file:</p>
+            <p>Add these scripts to your HTML file:</p>
             <div class="code-block">
                 <pre><code>&lt;!-- Add React and ReactDOM --&gt;
 &lt;script src="https://unpkg.com/react@18/umd/react.production.min.js"&gt;&lt;/script&gt;
 &lt;script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"&gt;&lt;/script&gt;
 
-&lt;!-- Add the widget script --&gt;
-&lt;script src="dist/chatbot-widget.umd.js"&gt;&lt;/script&gt;
+&lt;!-- Add the widget's CSS and script --&gt;
+&lt;link rel="stylesheet" href="style.css"&gt;
+&lt;script src="chatbot-widget.umd.js"&gt;&lt;/script&gt;
 
 &lt;!-- Initialize the widget --&gt;
 &lt;script&gt;
   ChatbotWidget.init({
-    apiHost: 'http://localhost:3000',
-    chatflowid: 'demo-chatflow'
+    apiHost: 'http://localhost:3000'
   });
 &lt;/script&gt;</code></pre>
             </div>
@@ -89,7 +83,6 @@
             <div class="code-block">
                 <pre><code>ChatbotWidget.init({
   apiHost: 'http://localhost:3000',
-  chatflowid: 'demo-chatflow',
   theme: {
     chatWindow: {
       height: 600,
@@ -100,19 +93,21 @@
             </div>
         </div>
     </div>
-<!--
+
+    <!-- Add React and ReactDOM -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 
-    <script src="./dist/chatbot-widget.umd.js"></script>
+    <!-- Add the widget's CSS and script -->
+    <link rel="stylesheet" href="style.css">
+    <script src="chatbot-widget.umd.js"></script>
 
+    <!-- Initialize the widget -->
     <script>
-        // Wait for the widget to be loaded
-        function initChatbot() {
+        window.onload = function() {
             if (window.ChatbotWidget) {
-                window.ChatbotWidget.init({
+                ChatbotWidget.init({
                     apiHost: 'http://localhost:3000',
-                    chatflowid: 'demo-chatflow',
                     theme: {
                         chatWindow: {
                             height: 600,
@@ -120,32 +115,8 @@
                         }
                     }
                 });
-            } else {
-                // If widget is not loaded yet, try again in 100ms
-                setTimeout(initChatbot, 100);
             }
-        }
-
-        // Start initialization when the page is loaded
-        document.addEventListener('DOMContentLoaded', initChatbot);
-    </script> -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-
-<!-- Add the widget script -->
-<script src="https://dillibabukadati.github.io/chatbot-widget/chatbot-widget.umd.js"></script>
-
-<!-- Initialize the widget -->
-<script>
-  ChatbotWidget.init({
-    apiHost: 'YOUR_API_HOST', // Replace with your actual API host
-    theme: {
-      chatWindow: {
-        height: 600,
-        width: 400
-      }
-    }
-  });
-</script>
+        };
+    </script>
 </body>
 </html>
