@@ -34,41 +34,42 @@ const Chatbot: React.FC<ChatbotProps> = ({
       timestamp: new Date(),
     };
 
-    const thinkingMessage: Message = {
-      id: (Date.now() + 1).toString(),
-      content: "Thinking...",
-      isBot: true,
-      timestamp: new Date(),
-    };
-
-    setMessages(prev => [...prev, userMessage, thinkingMessage]);
+    setMessages(prev => [...prev, userMessage]);
     setInput('');
     setIsStreaming(true);
 
     try {
       const response = await fetch(`${apiHost}/chat`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: input,
+        }),
       });
+
+      if (!response.ok) {
+        throw new Error('Failed to get response from the server');
+      }
 
       const data = await response.json();
 
       const botMessage: Message = {
-        id: (Date.now() + 2).toString(),
-        content: data.message || "I'm sorry, I couldn't process that.",
+        id: (Date.now() + 1).toString(),
+        content: data.message,
         isBot: true,
         timestamp: new Date(),
       };
 
-      setMessages(prev => [...prev.slice(0, -1), botMessage]); // Replace "Thinking..." message with the actual response
+      setMessages(prev => [...prev, botMessage]);
     } catch (error) {
       console.error('Error:', error);
       setMessages(prev => [
-        ...prev.slice(0, -1), // Remove "Thinking..."
+        ...prev,
         {
-          id: (Date.now() + 2).toString(),
-          content: "I'm sorry, but something went wrong. Please try again later!",
+          id: (Date.now() + 1).toString(),
+          content: "I'm sorry, but I couldn't connect to the server. Please try again later!",
           isBot: true,
           timestamp: new Date(),
         },
@@ -77,7 +78,6 @@ const Chatbot: React.FC<ChatbotProps> = ({
       setIsStreaming(false);
     }
   };
-
 
   return (
     <div className="fixed bottom-4 right-4 z-50">
