@@ -32,13 +32,13 @@ Add the following script tags to your HTML:
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 
 <!-- Add the widget script -->
-<script src="path/to/chatbot-widget.umd.js"></script>
+<script src="https://dillibabukadati.github.io/chatbot-widget/chatbot-widget.umd.js"></script>
+<!-- <script src="path/to/chatbot-widget.umd.js"></script> -->
 
 <!-- Initialize the widget -->
 <script>
   ChatbotWidget.init({
     apiHost: 'http://your-api-host',
-    chatflowid: 'your-chatflow-id',
     theme: {
       chatWindow: {
         height: 600, // optional
